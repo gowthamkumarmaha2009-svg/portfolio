@@ -18,14 +18,26 @@ function type() {
 type();
 
 
-// GitHub Projects Fetch
+// 🔥 Format repo names nicely
+function formatName(name) {
+    return name
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+
+// 🔥 Fetch GitHub projects (clean + filtered)
 fetch("https://api.github.com/users/gowthamkumarmaha2009-svg/repos")
 .then(res => res.json())
 .then(data => {
     const container = document.getElementById("repo-container");
 
     data
-    .filter(repo => !repo.fork)
+    .filter(repo => 
+        !repo.fork &&
+        repo.name !== "portfolio"
+    )
+    .sort((a, b) => b.updated_at.localeCompare(a.updated_at))
     .slice(0, 6)
     .forEach(repo => {
 
@@ -33,8 +45,8 @@ fetch("https://api.github.com/users/gowthamkumarmaha2009-svg/repos")
         card.className = "card";
 
         card.innerHTML = `
-            <h3>${repo.name}</h3>
-            <p>${repo.description || "No description available"}</p>
+            <h3>${formatName(repo.name)}</h3>
+            <p>${repo.description || "Project showcasing development and problem-solving skills."}</p>
         `;
 
         card.onclick = () => window.open(repo.html_url, "_blank");
@@ -44,7 +56,7 @@ fetch("https://api.github.com/users/gowthamkumarmaha2009-svg/repos")
 });
 
 
-// Smooth Reveal Animation
+// Smooth reveal animation
 const reveals = document.querySelectorAll(".reveal");
 
 function revealOnScroll() {

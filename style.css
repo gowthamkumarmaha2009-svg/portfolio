@@ -67,6 +67,7 @@ section {
     border-radius: 12px;
     background: rgba(255,255,255,0.05);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .card:hover {
@@ -74,7 +75,7 @@ section {
     background: rgba(255,255,255,0.1);
 }
 
-/* ANIMATION */
+/* REVEAL */
 .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -84,12 +85,6 @@ section {
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 20px;
 }
 
 /* MOBILE */
