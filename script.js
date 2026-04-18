@@ -1,5 +1,11 @@
 const roles = ["Data Scientist", "ML Engineer", "Full Stack Builder"];
 const typingTarget = document.getElementById("typing");
+const progressBar = document.querySelector(".scroll-progress");
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinksContainer = document.querySelector(".nav-links");
+const navLinks = [...document.querySelectorAll(".nav-links a")];
+const sections = [...document.querySelectorAll("main section, main header")];
+const heroVisual = document.querySelector(".hero-visual");
 
 let roleIndex = 0;
 let charIndex = 0;
@@ -25,7 +31,32 @@ function runTyping() {
     setTimeout(runTyping, delay + pause);
 }
 
-runTyping();
+function setMenuState(open) {
+    document.body.classList.toggle("menu-open", open);
+    menuToggle.setAttribute("aria-expanded", String(open));
+}
+
+function updateScrollProgress() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? window.scrollY / scrollable : 0;
+    progressBar.style.transform = `scaleX(${progress})`;
+}
+
+function updateActiveNav() {
+    let currentId = "home";
+
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= window.innerHeight * 0.35 && rect.bottom >= window.innerHeight * 0.35) {
+            currentId = section.id;
+        }
+    });
+
+    navLinks.forEach(link => {
+        const isActive = link.getAttribute("href") === `#${currentId}`;
+        link.classList.toggle("is-active", isActive);
+    });
+}
 
 function formatName(name) {
     return name.replace(/-/g, " ").replace(/\b\w/g, char => char.toUpperCase());
@@ -150,10 +181,29 @@ const revealObserver = new IntersectionObserver(entries => {
     threshold: 0.16
 });
 
-observeReveals();
-loadProjects();
+menuToggle.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    setMenuState(!isOpen);
+});
 
-const heroVisual = document.querySelector(".hero-visual");
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        if (window.innerWidth <= 720) {
+            setMenuState(false);
+        }
+    });
+});
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 720) {
+        setMenuState(false);
+    }
+});
+
+window.addEventListener("scroll", () => {
+    updateScrollProgress();
+    updateActiveNav();
+}, { passive: true });
 
 window.addEventListener("pointermove", event => {
     if (!heroVisual || window.innerWidth < 981) {
@@ -163,4 +213,20 @@ window.addEventListener("pointermove", event => {
     const x = (event.clientX / window.innerWidth - 0.5) * 16;
     const y = (event.clientY / window.innerHeight - 0.5) * 16;
     heroVisual.style.transform = `translate3d(${x * 0.45}px, ${y * 0.45}px, 0)`;
+});
+
+window.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        setMenuState(false);
+    }
+});
+
+observeReveals();
+updateScrollProgress();
+updateActiveNav();
+loadProjects();
+runTyping();
+
+window.requestAnimationFrame(() => {
+    document.body.classList.add("page-ready");
 });
