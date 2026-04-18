@@ -4,64 +4,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gowtham Kumar | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
+<div class="page-shell">
+    <div class="aurora aurora-one"></div>
+    <div class="aurora aurora-two"></div>
+    <div class="grid-glow"></div>
+    <div class="noise"></div>
 
-<nav>
-    <h2>GK</h2>
-    <div>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#certs">Certifications</a>
-        <a href="#contact">Contact</a>
-    </div>
-</nav>
+    <nav class="topbar">
+        <a href="#home" class="brand">
+            <span class="brand-mark">GK</span>
+            <span class="brand-copy">Gowtham Kumar</span>
+        </a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#certs">Certifications</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<header class="hero">
-    <div>
-        <h1>Gowtham Kumar</h1>
-        <h2><span id="typing"></span></h2>
-        <p>Building scalable systems, ML solutions & modern web apps.</p>
-        <a href="resume_1818.pdf" class="btn">Resume</a>
-    </div>
-    <img src="photo.jpeg">
-</header>
+    <main>
+        <header id="home" class="hero section reveal">
+            <div class="hero-copy">
+                <p class="eyebrow">Data Science • Machine Learning • Full Stack</p>
+                <h1>Building ambitious digital products with intelligence, clarity, and speed.</h1>
+                <h2>I am a <span id="typing"></span></h2>
+                <p class="hero-text">
+                    Computer Science student at VIT focused on machine learning systems, modern web experiences,
+                    and production-ready solutions that feel sharp both technically and visually.
+                </p>
+                <div class="hero-actions">
+                    <a href="resume_1818.pdf" class="btn btn-primary" target="_blank" rel="noopener noreferrer">View Resume</a>
+                    <a href="#projects" class="btn btn-secondary">Explore Projects</a>
+                </div>
+                <div class="hero-metrics">
+                    <div class="metric-card">
+                        <strong>6+</strong>
+                        <span>Featured builds</span>
+                    </div>
+                    <div class="metric-card">
+                        <strong>ML + Web</strong>
+                        <span>Cross-domain focus</span>
+                    </div>
+                    <div class="metric-card">
+                        <strong>VIT</strong>
+                        <span>Data Science track</span>
+                    </div>
+                </div>
+            </div>
 
-<section id="about" class="reveal">
-    <h2>About</h2>
-    <p>
-        Computer Science student at VIT (Data Science).  
-        Focused on machine learning, scalable systems, and real-world problem solving.
-    </p>
-</section>
+            <div class="hero-visual">
+                <div class="portrait-wrap">
+                    <div class="portrait-ring"></div>
+                    <img src="photo.jpeg" alt="Portrait of Gowtham Kumar">
+                </div>
+                <div class="floating-panel panel-top">
+                    <span>Currently crafting</span>
+                    <strong>Scalable ML + Web Experiences</strong>
+                </div>
+                <div class="floating-panel panel-bottom">
+                    <span>Core mindset</span>
+                    <strong>Design, performance, impact</strong>
+                </div>
+            </div>
+        </header>
 
-<section id="projects" class="reveal">
-    <h2>Projects</h2>
-    <div id="repo-container" class="grid"></div>
-</section>
+        <section id="about" class="section reveal">
+            <div class="section-heading">
+                <p class="eyebrow">About Me</p>
+                <h2>A builder who likes systems that feel elegant under pressure.</h2>
+            </div>
+            <div class="about-layout">
+                <article class="glass-card feature-card">
+                    <h3>Technical Direction</h3>
+                    <p>
+                        I work at the intersection of data science, machine learning, and application development,
+                        with a strong interest in turning ideas into useful, well-crafted products.
+                    </p>
+                </article>
+                <article class="glass-card feature-card">
+                    <h3>What I Optimize For</h3>
+                    <p>
+                        Clean user experiences, reliable architecture, and meaningful outputs. I enjoy projects that
+                        combine analytics, automation, and polished interfaces.
+                    </p>
+                </article>
+                <article class="glass-card feature-card">
+                    <h3>How I Work</h3>
+                    <p>
+                        Fast iteration, strong fundamentals, and constant refinement. I care about both the engineering
+                        depth and the final presentation of the work.
+                    </p>
+                </article>
+            </div>
+        </section>
 
-<section id="certs" class="reveal">
-    <h2>Certifications</h2>
-    <div class="grid">
-        <div class="card">AWS Cloud Practitioner (2026)</div>
-        <div class="card">Data Science & Analytics – HP Life</div>
-        <div class="card">AI for Beginners – HP Life</div>
-    </div>
-</section>
+        <section id="projects" class="section reveal">
+            <div class="section-heading split-heading">
+                <div>
+                    <p class="eyebrow">Selected Work</p>
+                    <h2>Projects that reflect how I think, build, and ship.</h2>
+                </div>
+                <p class="section-note">Live repositories are pulled directly from GitHub and ranked by recent activity.</p>
+            </div>
+            <div id="repo-container" class="project-grid"></div>
+        </section>
 
-<section id="contact" class="reveal">
-    <h2>Contact</h2>
-    <p>📧 gowthamrafi95@gmail.com</p>
-    <p>📍 Vellore, India</p>
-    <a href="https://github.com/gowthamkumarmaha2009-svg" target="_blank">GitHub</a>
-</section>
+        <section id="certs" class="section reveal">
+            <div class="section-heading">
+                <p class="eyebrow">Credentials</p>
+                <h2>Learning that supports execution in cloud, AI, and analytics.</h2>
+            </div>
+            <div class="project-grid compact-grid">
+                <article class="glass-card cert-card">
+                    <span class="card-kicker">Cloud</span>
+                    <h3>AWS Cloud Practitioner</h3>
+                    <p>Foundation in cloud concepts, services, pricing, and architectural thinking.</p>
+                    <span class="card-meta">2026</span>
+                </article>
+                <article class="glass-card cert-card">
+                    <span class="card-kicker">Analytics</span>
+                    <h3>Data Science and Analytics</h3>
+                    <p>HP Life program covering core data workflows, interpretation, and decision support.</p>
+                    <span class="card-meta">HP Life</span>
+                </article>
+                <article class="glass-card cert-card">
+                    <span class="card-kicker">Artificial Intelligence</span>
+                    <h3>AI for Beginners</h3>
+                    <p>Practical introduction to AI concepts, use cases, and applied problem solving.</p>
+                    <span class="card-meta">HP Life</span>
+                </article>
+            </div>
+        </section>
 
-<footer>
-    <p>© 2026 Gowtham Kumar</p>
-</footer>
+        <section id="contact" class="section reveal">
+            <div class="contact-card glass-card">
+                <div class="section-heading">
+                    <p class="eyebrow">Contact</p>
+                    <h2>Let’s build something meaningful and visually unforgettable.</h2>
+                </div>
+                <div class="contact-grid">
+                    <a class="contact-item" href="mailto:gowthamrafi95@gmail.com">
+                        <span class="contact-label">Email</span>
+                        <strong>gowthamrafi95@gmail.com</strong>
+                    </a>
+                    <div class="contact-item">
+                        <span class="contact-label">Location</span>
+                        <strong>Vellore, India</strong>
+                    </div>
+                    <a class="contact-item" href="https://github.com/gowthamkumarmaha2009-svg" target="_blank" rel="noopener noreferrer">
+                        <span class="contact-label">GitHub</span>
+                        <strong>@gowthamkumarmaha2009-svg</strong>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© 2026 Gowtham Kumar. Designed to feel bold, fast, and intentional.</p>
+    </footer>
+</div>
 
 <script src="script.js"></script>
 </body>
