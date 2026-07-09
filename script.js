@@ -1,4 +1,4 @@
-const roles = ["Data Scientist", "ML Engineer", "Full Stack Builder"];
+const roles = ["Data Scientist", "ML Engineer", "Software Engineer"];
 const typingTarget = document.getElementById("typing");
 const progressBar = document.querySelector(".scroll-progress");
 const menuToggle = document.querySelector(".menu-toggle");
@@ -71,6 +71,10 @@ function formatDate(value) {
 }
 
 function inferTag(repo) {
+    if (repo.tag) {
+        return repo.tag;
+    }
+
     const combined = `${repo.name} ${repo.description || ""}`.toLowerCase();
 
     if (combined.includes("ml") || combined.includes("ai") || combined.includes("model")) {
@@ -91,75 +95,80 @@ function inferTag(repo) {
 function createProjectCard(repo) {
     const card = document.createElement("article");
     card.className = "glass-card project-card reveal";
-    card.tabIndex = 0;
+    const hasLink = Boolean(repo.html_url);
+
+    if (hasLink) {
+        card.tabIndex = 0;
+    }
 
     card.innerHTML = `
         <div class="project-top">
             <span class="project-tag">${inferTag(repo)}</span>
-            <h3>${formatName(repo.name)}</h3>
+            <h3>${repo.displayName || (repo.tag ? repo.name : formatName(repo.name))}</h3>
             <p>${repo.description || "A focused build that demonstrates practical engineering, thoughtful problem solving, and clear execution."}</p>
         </div>
         <div class="project-bottom">
-            <span class="project-link">View Repository</span>
-            <span class="project-updated">Updated ${formatDate(repo.updated_at)}</span>
+            <span class="project-link">${hasLink ? "View Repository" : repo.stack}</span>
+            <span class="project-updated">${repo.year || `Updated ${formatDate(repo.updated_at)}`}</span>
         </div>
     `;
 
-    const openRepo = () => window.open(repo.html_url, "_blank", "noopener,noreferrer");
-    card.addEventListener("click", openRepo);
-    card.addEventListener("keydown", event => {
-        if (event.key === "Enter" || event.key === " ") {
-            event.preventDefault();
-            openRepo();
-        }
-    });
+    if (hasLink) {
+        const openRepo = () => window.open(repo.html_url, "_blank", "noopener,noreferrer");
+        card.addEventListener("click", openRepo);
+        card.addEventListener("keydown", event => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                openRepo();
+            }
+        });
+    } else {
+        card.classList.add("project-card-static");
+    }
 
     return card;
 }
 
+const featuredProjects = [
+    {
+        name: "Healthcare Insurance Fraud Detection System",
+        description: "Engineered an end-to-end fraud detection pipeline with Logistic Regression, Decision Trees, ensemble methods, preprocessing, feature engineering, EDA, and a real-time prediction web app.",
+        tag: "Machine Learning",
+        stack: "Python | Scikit-learn | SQL | Full Stack",
+        year: "2024"
+    },
+    {
+        name: "Statistical Analysis & Forecasting - Electrical Power Consumption",
+        description: "Trained and compared ML models on nationwide power-consumption data, used hypothesis testing and regression analysis, and produced visual dashboards for non-technical audiences.",
+        tag: "Forecasting",
+        stack: "Python | Pandas | Matplotlib | Seaborn",
+        year: "2024"
+    },
+    {
+        name: "Centralized Event Management System",
+        description: "Designed a SQL-backed system for event registrations, scheduling, coordination, and administrator reports using joins, aggregation, sub-queries, and backend data workflows.",
+        tag: "Database Systems",
+        stack: "SQL | Backend | Python",
+        year: "2023"
+    },
+    {
+        name: "Oil Craft - E-Commerce Web Platform",
+        description: "Built a responsive e-commerce frontend with product selection, shopping cart flow, and payment workflow, with a focus on user-centric design and detail.",
+        tag: "Frontend Development",
+        stack: "HTML | CSS | JavaScript",
+        year: "2023"
+    }
+];
+
 async function loadProjects() {
     const container = document.getElementById("repo-container");
-    container.innerHTML = `
-        <article class="glass-card project-card">
-            <div class="project-top">
-                <span class="project-tag">Loading</span>
-                <h3>Fetching latest work</h3>
-                <p>Pulling project data from GitHub to populate this section with the most recent repositories.</p>
-            </div>
-        </article>
-    `;
+    container.innerHTML = "";
 
-    try {
-        const response = await fetch("https://api.github.com/users/gowthamkumarmaha2009-svg/repos");
-        const repos = await response.json();
+    featuredProjects.forEach(project => {
+        container.appendChild(createProjectCard(project));
+    });
 
-        if (!Array.isArray(repos)) {
-            throw new Error("Unexpected GitHub response");
-        }
-
-        const curated = repos
-            .filter(repo => !repo.fork && repo.name !== "portfolio")
-            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
-            .slice(0, 6);
-
-        container.innerHTML = "";
-
-        curated.forEach(repo => {
-            container.appendChild(createProjectCard(repo));
-        });
-
-        observeReveals();
-    } catch (error) {
-        container.innerHTML = `
-            <article class="glass-card project-card">
-                <div class="project-top">
-                    <span class="project-tag">Unavailable</span>
-                    <h3>Projects could not load</h3>
-                    <p>GitHub data is not reachable right now. The rest of the portfolio remains available.</p>
-                </div>
-            </article>
-        `;
-    }
+    observeReveals();
 }
 
 const revealItems = new Set();

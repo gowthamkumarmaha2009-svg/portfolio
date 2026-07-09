@@ -292,7 +292,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .section-heading h2,
 .skills-spotlight h3 {
     font-family: "Space Grotesk", sans-serif;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
 }
 
 .hero-copy h1 {
@@ -390,6 +390,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .about-layout,
 .project-grid,
 .contact-grid,
+.timeline-grid,
 .skills-layout,
 .skills-cloud {
     display: grid;
@@ -546,6 +547,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .feature-card,
 .cert-card,
 .project-card,
+.timeline-card,
 .contact-card,
 .skills-spotlight {
     padding: 1.7rem;
@@ -554,6 +556,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .feature-card h3,
 .cert-card h3,
 .project-card h3,
+.timeline-card h3,
 .skills-spotlight h3 {
     position: relative;
     z-index: 1;
@@ -565,6 +568,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
 .feature-card p,
 .cert-card p,
 .project-card p,
+.timeline-card p,
 .skills-spotlight p {
     position: relative;
     z-index: 1;
@@ -633,6 +637,20 @@ body.menu-open .menu-toggle span:nth-child(3) {
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
+.timeline-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.timeline-card {
+    min-height: 100%;
+}
+
+.timeline-meta {
+    color: var(--accent);
+    font-weight: 700;
+    margin: -0.15rem 0 1rem;
+}
+
 .compact-grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
@@ -655,6 +673,14 @@ body.menu-open .menu-toggle span:nth-child(3) {
     transform: translateY(-8px);
     border-color: rgba(126, 249, 198, 0.28);
     box-shadow: 0 28px 60px rgba(0, 0, 0, 0.32);
+}
+
+.project-card-static {
+    cursor: default;
+}
+
+.project-card-static:hover {
+    transform: translateY(-4px);
 }
 
 .project-top,
@@ -794,6 +820,7 @@ body.menu-open .menu-toggle span:nth-child(3) {
     .hero,
     .about-layout,
     .contact-grid,
+    .timeline-grid,
     .skills-layout {
         grid-template-columns: 1fr;
     }
